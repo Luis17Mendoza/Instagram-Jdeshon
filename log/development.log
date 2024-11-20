@@ -1,0 +1,1637 @@
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:03:59 -0600
+  [1m[35m (41.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 4 pending migrations:
+
+db/migrate/20241025222555_devise_create_users.rb
+db/migrate/20241025223558_create_posts.rb
+db/migrate/20241027011909_create_active_storage_tables.active_storage.rb
+db/migrate/20241027165141_add_user_id_to_posts.rb
+
+
+):
+  
+activerecord (7.2.1.2) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.2) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.2) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.2) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.2) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (13.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-11-20 01:06:06.262501', '2024-11-20 01:06:06.262504') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20241025222555)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241025222555') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePosts (20241025223558)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_user_id" ON "posts" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241025223558') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20241027011909)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241027011909') RETURNING "version"[0m
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToPosts (20241027165141)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:06:27 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241027165141_add_user_id_to_posts.rb
+
+
+):
+  
+activerecord (7.2.1.2) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.2) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.2) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.2) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.2) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/favicon.ico" for 127.0.0.1 at 2024-11-19 19:06:27 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20241027165141_add_user_id_to_posts.rb
+
+
+):
+  
+activerecord (7.2.1.2) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1.2) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1.2) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (7.2.1.2) lib/active_record/migration.rb:668:in `block in call'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1.2) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1.2) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.8) lib/rack/method_override.rb:28:in `call'
+rack (3.1.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1.2) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserIdToPosts (20241027165141)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserIdToPosts (20241027165141)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserIdToPosts (20241027165141)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserIdToPosts (20241027165141)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241027165141') RETURNING "version"[0m
+  [1m[36mTRANSACTION (9.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:18:25 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 85ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:18:25 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 1.5ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 41.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2435.0ms | GC: 39.5ms)
+Completed 200 OK in 2535ms (Views: 2462.8ms | ActiveRecord: 17.9ms (0 queries, 0 cached) | GC: 39.5ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:19:43 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 121ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | GC: 0.6ms)
+Completed 200 OK in 319ms (Views: 16.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:20:04 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:20:04 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 2.1ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | GC: 0.4ms)
+Completed 200 OK in 11ms (Views: 9.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:20:07 -0600
+Processing by PostsController#new as HTML
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:20:07 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | GC: 0.3ms)
+Completed 200 OK in 11ms (Views: 8.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:20:12 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | GC: 0.2ms)
+Completed 200 OK in 11ms (Views: 8.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:20:24 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | GC: 0.9ms)
+Completed 200 OK in 343ms (Views: 13.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2024-11-19 19:20:28 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_error_messages.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application (Duration: 7.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 26.2ms | GC: 0.7ms)
+Completed 200 OK in 31ms (Views: 29.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2024-11-19 19:20:28 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:20:44 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.2ms | GC: 5.5ms)
+Completed 200 OK in 23ms (Views: 21.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 5.6ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2024-11-19 19:20:54 -0600
+Processing by Devise::PasswordsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/passwords/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_error_messages.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 2.0ms | GC: 1.7ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/passwords/new.html.erb within layouts/application (Duration: 21.8ms | GC: 6.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 103.6ms | GC: 55.8ms)
+Completed 200 OK in 120ms (Views: 105.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 59.5ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2024-11-19 19:21:18 -0600
+Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]"}, "commit"=>"Send me reset password instructions"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/passwords/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_error_messages.html.erb (Duration: 1.7ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/passwords/new.html.erb within layouts/application (Duration: 5.5ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.4ms | GC: 0.7ms)
+Completed 422 Unprocessable Content in 39ms (Views: 14.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:21:44 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 2.0ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | GC: 0.7ms)
+Completed 200 OK in 18ms (Views: 14.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:21:54 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 10.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 40.4ms | GC: 0.6ms)
+Completed 200 OK in 287ms (Views: 51.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/coupons/" for 127.0.0.1 at 2024-11-19 19:22:04 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/coupons"):
+  
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:22:05 -0600
+Processing by PostsController#new as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:22:05 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 5.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 27.8ms | GC: 5.6ms)
+Completed 200 OK in 30ms (Views: 28.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 5.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:23:11 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:23:11 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.6ms | GC: 0.9ms)
+Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:23:21 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 8.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.4ms | GC: 0.6ms)
+Completed 200 OK in 404ms (Views: 17.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:23:37 -0600
+Processing by PostsController#new as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:23:37 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 20.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 29.4ms | GC: 0.5ms)
+Completed 200 OK in 40ms (Views: 30.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:23:48 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.1ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.8ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | GC: 0.4ms)
+Completed 200 OK in 368ms (Views: 8.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:24:01 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | GC: 0.3ms)
+Completed 200 OK in 364ms (Views: 11.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2024-11-19 19:24:06 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_error_messages.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | GC: 0.3ms)
+Completed 200 OK in 11ms (Views: 9.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2024-11-19 19:24:21 -0600
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["email", "[FILTERED]"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-11-20 01:24:21.947296"], ["updated_at", "2024-11-20 01:24:21.947296"]]
+  [1m[36mTRANSACTION (22.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/posts/new
+Completed 303 See Other in 334ms (ActiveRecord: 25.5ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:24:21 -0600
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 6.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | GC: 0.7ms)
+Completed 200 OK in 151ms (Views: 22.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 2.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2024-11-19 19:25:07 -0600
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>"foto", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fd61cf8f4e0 @tempfile=#<Tempfile:/tmp/RackMultipart20241119-6426-gk5d5.png>, @content_type="image/png", @original_filename="carro.png", @headers="Content-Disposition: form-data; name=\"post[image]\"; filename=\"carro.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | GC: 0.7ms)
+Completed 200 OK in 177ms (Views: 18.3ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 12.5ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2024-11-19 19:25:43 -0600
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>"foto del carro de carrera"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 1.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | GC: 0.7ms)
+Completed 200 OK in 30ms (Views: 17.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:25:59 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 3.8ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.5ms | GC: 0.8ms)
+Completed 200 OK in 25ms (Views: 12.8ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2024-11-19 19:26:09 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 31ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:09 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:26:09 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.1ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 6.4ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | GC: 0.3ms)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:26:12 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 318ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:12 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.7ms)
+Completed 200 OK in 17ms (Views: 13.0ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:26:27 -0600
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | GC: 0.6ms)
+Completed 200 OK in 18ms (Views: 15.4ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:31 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | GC: 0.5ms)
+Completed 200 OK in 12ms (Views: 8.8ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:26:53 -0600
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 15ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 7.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:53 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 5.4ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | GC: 0.8ms)
+Completed 200 OK in 20ms (Views: 12.9ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:57 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 3.4ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | GC: 1.1ms)
+Completed 200 OK in 19ms (Views: 14.6ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:26:59 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.1ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 0.5ms)
+Completed 200 OK in 10ms (Views: 7.4ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.7ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2024-11-19 19:27:11 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 7ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:27:11 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:27:11 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 3.1ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 25.4ms | GC: 0.6ms)
+Completed 200 OK in 28ms (Views: 26.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:27:17 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 257ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:27:18 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | GC: 0.5ms)
+Completed 200 OK in 17ms (Views: 13.5ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:27:35 -0600
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 3.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.6ms | GC: 0.4ms)
+Completed 200 OK in 29ms (Views: 19.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2024-11-19 19:27:40 -0600
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>""}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 10.8ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.2ms | GC: 0.9ms)
+Completed 200 OK in 51ms (Views: 38.0ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 1.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:28:10 -0600
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 9ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2024-11-19 19:28:46 -0600
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 4ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:28:46 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.2ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | GC: 0.9ms)
+Completed 200 OK in 27ms (Views: 18.0ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.9ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:46:48 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 162.6ms | GC: 0.0ms)
+Completed 200 OK in 255ms (Views: 165.0ms | ActiveRecord: 2.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:46:57 -0600
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 8.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 28.8ms | GC: 0.0ms)
+Completed 200 OK in 53ms (Views: 30.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2024-11-19 19:48:12 -0600
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>"la carro del futuro", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007f4850b5eb00 @tempfile=#<Tempfile:/tmp/RackMultipart20241119-7572-utrlza.png>, @content_type="image/png", @original_filename="carro.png", @headers="Content-Disposition: form-data; name=\"post[image]\"; filename=\"carro.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Create Post"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mPost Create (0.2ms)[0m  [1m[32mINSERT INTO "posts" ("description", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["description", "la carro del futuro"], ["user_id", 1], ["created_at", "2024-11-20 01:48:12.583791"], ["updated_at", "2024-11-20 01:48:12.583791"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Blob Create (0.3ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "aubqm6o39j766bjx5xg35blccia1"], ["filename", "carro.png"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 7204], ["checksum", "2l+PzebZK6O0Xxe90HTp/w=="], ["created_at", "2024-11-20 01:48:12.621265"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "Post"], ["record_id", 1], ["blob_id", 1], ["created_at", "2024-11-20 01:48:12.628540"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mPost Update (0.1ms)[0m  [1m[33mUPDATE "posts" SET "updated_at" = ? WHERE "posts"."id" = ?[0m  [["updated_at", "2024-11-20 01:48:12.631869"], ["id", 1]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mTRANSACTION (18.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+[36m  Disk Storage (6.2ms) [0m[32mUploaded file to key: aubqm6o39j766bjx5xg35blccia1 (checksum: 2l+PzebZK6O0Xxe90HTp/w==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 3ce2e8a4-1783-4150-81aa-d64e14e80ea6) to Async(default) with arguments: #<GlobalID:0x00007f485c35c9f0 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/1>>
+[ActiveJob] ↳ app/controllers/posts_controller.rb:22:in `create'
+Redirected to http://127.0.0.1:3000/posts/1
+Completed 302 Found in 248ms (ActiveRecord: 29.1ms (6 queries, 0 cached) | GC: 18.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2024-11-19 19:48:12 -0600
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6] Performing ActiveStorage::AnalyzeJob (Job ID: 3ce2e8a4-1783-4150-81aa-d64e14e80ea6) from Async(default) enqueued at 2024-11-20T01:48:12.766497079Z with arguments: #<GlobalID:0x00007f4852d95278 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6] [36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: aubqm6o39j766bjx5xg35blccia1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  Rendered posts/show.html.erb within layouts/application (Duration: 14.5ms | GC: 0.3ms)
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mActiveStorage::Blob Update (10.0ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":202,\"height\":148,\"analyzed\":true}"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 1]]
+  Rendered layout layouts/application.html.erb (Duration: 106.0ms | GC: 1.0ms)
+Completed 200 OK in 159ms (Views: 107.0ms | ActiveRecord: 0.5ms (4 queries, 0 cached) | GC: 1.4ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "updated_at" = ? WHERE "posts"."id" = ?[0m  [["updated_at", "2024-11-20 01:48:12.981113"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3ce2e8a4-1783-4150-81aa-d64e14e80ea6] Performed ActiveStorage::AnalyzeJob (Job ID: 3ce2e8a4-1783-4150-81aa-d64e14e80ea6) from Async(default) in 188.97ms
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzMwMCwzMDBdfSwicHVyIjoidmFyaWF0aW9uIn19--3f102d69aa3bad59e3a761e1f15008f6fe78ce9c/carro.png" for 127.0.0.1 at 2024-11-19 19:48:13 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc", "variation_key"=>"[FILTERED]", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "pkPfIsoBPuv58vltqqvChmQguaY="], ["LIMIT", 1]]
+[36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: aubqm6o39j766bjx5xg35blccia1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveStorage::VariantRecord Create (17.9ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 1], ["variation_digest", "pkPfIsoBPuv58vltqqvChmQguaY="]]
+  [1m[36mActiveStorage::Blob Load (5.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "fvrobytxph39xhd8r4o0eg6vvccy"], ["filename", "carro.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 14214], ["checksum", "TXUpdubUUHpgzB6ow19NDA=="], ["created_at", "2024-11-20 01:48:13.424012"]]
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 1], ["blob_id", 2], ["created_at", "2024-11-20 01:48:13.427976"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+[36m  Disk Storage (0.8ms) [0m[32mUploaded file to key: fvrobytxph39xhd8r4o0eg6vvccy (checksum: TXUpdubUUHpgzB6ow19NDA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 443ac6d3-5cfc-4776-97db-136293350623) to Async(default) with arguments: #<GlobalID:0x00007f4850ba5500 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[36m  Disk Storage (0.9ms) [0m[34mGenerated URL for file at key: fvrobytxph39xhd8r4o0eg6vvccy (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmdnJvYnl0eHBoMzl4aGQ4cjRvMGVnNnZ2Y2N5IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MTMuNDgyWiIsInB1ciI6ImJsb2Jfa2V5In19--b5c216dfe2404e727a6187e609c637b867a0a4ef/carro.jpg)[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623] Performing ActiveStorage::AnalyzeJob (Job ID: 443ac6d3-5cfc-4776-97db-136293350623) from Async(default) enqueued at 2024-11-20T01:48:13.449799451Z with arguments: #<GlobalID:0x00007f4850bc4310 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/2>>
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmdnJvYnl0eHBoMzl4aGQ4cjRvMGVnNnZ2Y2N5IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MTMuNDgyWiIsInB1ciI6ImJsb2Jfa2V5In19--b5c216dfe2404e727a6187e609c637b867a0a4ef/carro.jpg
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623] [36m  Disk Storage (0.3ms) [0m[34mDownloaded file from key: fvrobytxph39xhd8r4o0eg6vvccy[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+Completed 302 Found in 427ms (ActiveRecord: 25.2ms (7 queries, 0 cached) | GC: 19.3ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mActiveStorage::Blob Update (2.7ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":300,\"height\":300,\"analyzed\":true}"], ["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 2]]
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmdnJvYnl0eHBoMzl4aGQ4cjRvMGVnNnZ2Y2N5IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MTMuNDgyWiIsInB1ciI6ImJsb2Jfa2V5In19--b5c216dfe2404e727a6187e609c637b867a0a4ef/carro.jpg" for 127.0.0.1 at 2024-11-19 19:48:13 -0600
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623]   [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [443ac6d3-5cfc-4776-97db-136293350623] Performed ActiveStorage::AnalyzeJob (Job ID: 443ac6d3-5cfc-4776-97db-136293350623) from Async(default) in 86.05ms
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 5ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/1/edit" for 127.0.0.1 at 2024-11-19 19:48:25 -0600
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67:in `authorize_user!'
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:37:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/edit.html.erb:7
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/edit.html.erb:9
+  Rendered posts/edit.html.erb within layouts/application (Duration: 6.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.3ms | GC: 0.0ms)
+Completed 200 OK in 43ms (Views: 22.0ms | ActiveRecord: 3.3ms (6 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc/carro.png" for 127.0.0.1 at 2024-11-19 19:48:26 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (11.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[36m  Disk Storage (0.5ms) [0m[34mGenerated URL for file at key: aubqm6o39j766bjx5xg35blccia1 (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJhdWJxbTZvMzlqNzY2Ymp4NXhnMzVibGNjaWExIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MjYuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--59e497cbd49e635603cfeb2590b7007d5b1e0b3e/carro.png)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJhdWJxbTZvMzlqNzY2Ymp4NXhnMzVibGNjaWExIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MjYuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--59e497cbd49e635603cfeb2590b7007d5b1e0b3e/carro.png
+Completed 302 Found in 16ms (ActiveRecord: 11.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJhdWJxbTZvMzlqNzY2Ymp4NXhnMzVibGNjaWExIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MjYuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--59e497cbd49e635603cfeb2590b7007d5b1e0b3e/carro.png" for 127.0.0.1 at 2024-11-19 19:48:26 -0600
+Processing by ActiveStorage::DiskController#show as PNG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 15ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2024-11-19 19:48:37 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 8ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:48:37 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:48:37 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 3.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | GC: 0.0ms)
+Completed 200 OK in 60ms (Views: 15.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:48:40 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 320ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:48:40 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 6.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 12.7ms | ActiveRecord: 0.3ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzQwMCw0MDBdfSwicHVyIjoidmFyaWF0aW9uIn19--436cea16c55c86b5b737ff21ca87c87ad0143052/carro.png" for 127.0.0.1 at 2024-11-19 19:48:40 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--26a6540fd08e5c3861d25c880250c701ab4ae9cc", "variation_key"=>"[FILTERED]", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "ku0PabRttFoyg1lxkOD6CdmOCUE="], ["LIMIT", 1]]
+[36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: aubqm6o39j766bjx5xg35blccia1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveStorage::VariantRecord Create (1.5ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 1], ["variation_digest", "ku0PabRttFoyg1lxkOD6CdmOCUE="]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.5ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "89foypdq360bahpmwtahewk3yd9i"], ["filename", "carro.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 19898], ["checksum", "2/8+t81KBdC8kfiWGLqJbA=="], ["created_at", "2024-11-20 01:48:40.821687"]]
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 2], ["blob_id", 3], ["created_at", "2024-11-20 01:48:40.830436"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+[36m  Disk Storage (0.5ms) [0m[32mUploaded file to key: 89foypdq360bahpmwtahewk3yd9i (checksum: 2/8+t81KBdC8kfiWGLqJbA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: a185d0d3-ebc5-4d0c-852f-c3c50bccc09a) to Async(default) with arguments: #<GlobalID:0x00007f4850b27a10 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/3>>
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: 89foypdq360bahpmwtahewk3yd9i (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI4OWZveXBkcTM2MGJhaHBtd3RhaGV3azN5ZDlpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6NDAuODM4WiIsInB1ciI6ImJsb2Jfa2V5In19--c30ebfaa46cea0cd83600ca195d881fc7a3f7949/carro.jpg)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI4OWZveXBkcTM2MGJhaHBtd3RhaGV3azN5ZDlpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6NDAuODM4WiIsInB1ciI6ImJsb2Jfa2V5In19--c30ebfaa46cea0cd83600ca195d881fc7a3f7949/carro.jpg
+Completed 302 Found in 119ms (ActiveRecord: 3.2ms (7 queries, 0 cached) | GC: 14.3ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a] Performing ActiveStorage::AnalyzeJob (Job ID: a185d0d3-ebc5-4d0c-852f-c3c50bccc09a) from Async(default) enqueued at 2024-11-20T01:48:40.835641222Z with arguments: #<GlobalID:0x00007f4850b4db20 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/3>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a] [36m  Disk Storage (0.4ms) [0m[34mDownloaded file from key: 89foypdq360bahpmwtahewk3yd9i[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mActiveStorage::Blob Update (0.9ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":400,\"height\":400,\"analyzed\":true}"], ["id", 3]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 3]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a]   [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a185d0d3-ebc5-4d0c-852f-c3c50bccc09a] Performed ActiveStorage::AnalyzeJob (Job ID: a185d0d3-ebc5-4d0c-852f-c3c50bccc09a) from Async(default) in 15.68ms
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI4OWZveXBkcTM2MGJhaHBtd3RhaGV3azN5ZDlpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6NDAuODM4WiIsInB1ciI6ImJsb2Jfa2V5In19--c30ebfaa46cea0cd83600ca195d881fc7a3f7949/carro.jpg" for 127.0.0.1 at 2024-11-19 19:48:40 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2024-11-19 19:48:49 -0600
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  Rendered posts/show.html.erb within layouts/application (Duration: 3.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 8.2ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmdnJvYnl0eHBoMzl4aGQ4cjRvMGVnNnZ2Y2N5IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTM6MTMuNDgyWiIsInB1ciI6ImJsb2Jfa2V5In19--b5c216dfe2404e727a6187e609c637b867a0a4ef/carro.jpg" for 127.0.0.1 at 2024-11-19 19:48:50 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/posts/1" for 127.0.0.1 at 2024-11-19 19:48:53 -0600
+Processing by PostsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67:in `authorize_user!'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (16.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+  [1m[36mActiveStorage::Attachment Destroy (0.6ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+  [1m[36mPost Update (0.2ms)[0m  [1m[33mUPDATE "posts" SET "updated_at" = ? WHERE "posts"."id" = ?[0m  [["updated_at", "2024-11-20 01:48:53.894916"], ["id", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ? LIMIT ?[0m  [["blob_id", 1], ["LIMIT", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ?[0m  [["blob_id", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 3]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::VariantRecord Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 2]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 2]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::VariantRecord Destroy (0.0ms)[0m  [1m[31mDELETE FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+  [1m[36mActiveStorage::Blob Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ?[0m  [["id", 1]]
+  ↳ app/models/post.rb:11:in `purge_image'
+[36m  Disk Storage (1.6ms) [0m[31mDeleted file from key: aubqm6o39j766bjx5xg35blccia1[0m
+[36m  Disk Storage (0.0ms) [0m[31mDeleted files by key prefix: variants/aubqm6o39j766bjx5xg35blccia1/[0m
+  [1m[36mPost Destroy (0.1ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b) to Async(default) with arguments: #<GlobalID:0x00007f48511b2998 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::PurgeJob] [09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b]   [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] [ActiveStorage::PurgeJob] [09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b] Discarded ActiveStorage::PurgeJob (Job ID: 09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b) due to a ActiveRecord::RecordNotFound (Couldn't find ActiveStorage::Blob with 'id'=1).
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b] Performed ActiveStorage::PurgeJob (Job ID: 09b60e14-ecc4-4ef5-a75a-5b1adeb8e75b) from Async(default) in 4.08ms
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 263c946d-220f-4925-87d0-37571b1d64a9) to Async(default) with arguments: #<GlobalID:0x00007f485120c538 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/3>>
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9] Performing ActiveStorage::PurgeJob (Job ID: 263c946d-220f-4925-87d0-37571b1d64a9) from Async(default) enqueued at 2024-11-20T01:48:53.952765201Z with arguments: #<GlobalID:0x00007f4851249cf8 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/3>>
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1) to Async(default) with arguments: #<GlobalID:0x00007f4851292a98 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mActiveStorage::Attachment Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ? LIMIT ?[0m  [["blob_id", 3], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] ↳ app/controllers/posts_controller.rb:51:in `destroy'
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ?[0m  [["blob_id", 3]]
+Redirected to http://127.0.0.1:3000/posts
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mActiveStorage::Blob Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ?[0m  [["id", 3]]
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9] [36m  Disk Storage (0.2ms) [0m[31mDeleted file from key: 89foypdq360bahpmwtahewk3yd9i[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1] Performing ActiveStorage::PurgeJob (Job ID: 7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1) from Async(default) enqueued at 2024-11-20T01:48:53.962703315Z with arguments: #<GlobalID:0x00007f48536fb1f0 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9] [36m  Disk Storage (0.1ms) [0m[31mDeleted files by key prefix: variants/89foypdq360bahpmwtahewk3yd9i/[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [263c946d-220f-4925-87d0-37571b1d64a9] Performed ActiveStorage::PurgeJob (Job ID: 263c946d-220f-4925-87d0-37571b1d64a9) from Async(default) in 59.75ms
+Completed 302 Found in 175ms (ActiveRecord: 22.2ms (20 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mActiveStorage::Attachment Exists? (15.6ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ? LIMIT ?[0m  [["blob_id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ?[0m  [["blob_id", 2]]
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+Started GET "/posts" for 127.0.0.1 at 2024-11-19 19:48:54 -0600
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mActiveStorage::Blob Destroy (0.2ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1] [36m  Disk Storage (0.2ms) [0m[31mDeleted file from key: fvrobytxph39xhd8r4o0eg6vvccy[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1] [36m  Disk Storage (0.0ms) [0m[31mDeleted files by key prefix: variants/fvrobytxph39xhd8r4o0eg6vvccy/[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1] Performed ActiveStorage::PurgeJob (Job ID: 7536377c-ab09-4ef9-9d4d-fa06dd5c5bc1) from Async(default) in 105.35ms
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 6.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.2ms | GC: 7.7ms)
+Completed 200 OK in 51ms (Views: 38.4ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 7.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:48:57 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  Rendered posts/index.html.erb within layouts/application (Duration: 5.5ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | GC: 0.9ms)
+Completed 200 OK in 27ms (Views: 17.0ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2024-11-19 19:48:59 -0600
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (Duration: 1.2ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | GC: 0.6ms)
+Completed 200 OK in 10ms (Views: 7.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2024-11-19 19:49:20 -0600
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>"El carro del futuro", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007f48512846a0 @tempfile=#<Tempfile:/tmp/RackMultipart20241119-7572-a1tvdk.png>, @content_type="image/png", @original_filename="carro.png", @headers="Content-Disposition: form-data; name=\"post[image]\"; filename=\"carro.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mPost Create (1.7ms)[0m  [1m[32mINSERT INTO "posts" ("description", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["description", "El carro del futuro"], ["user_id", 1], ["created_at", "2024-11-20 01:49:20.728355"], ["updated_at", "2024-11-20 01:49:20.728355"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Blob Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "mgtvwamxb0qreay503gxm3njldh6"], ["filename", "carro.png"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 7204], ["checksum", "2l+PzebZK6O0Xxe90HTp/w=="], ["created_at", "2024-11-20 01:49:20.733742"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "Post"], ["record_id", 2], ["blob_id", 4], ["created_at", "2024-11-20 01:49:20.735553"]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mPost Update (0.1ms)[0m  [1m[33mUPDATE "posts" SET "updated_at" = ? WHERE "posts"."id" = ?[0m  [["updated_at", "2024-11-20 01:49:20.737620"], ["id", 2]]
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:22:in `create'
+[36m  Disk Storage (0.6ms) [0m[32mUploaded file to key: mgtvwamxb0qreay503gxm3njldh6 (checksum: 2l+PzebZK6O0Xxe90HTp/w==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: d3543593-3449-448a-8345-dadd367c0757) to Async(default) with arguments: #<GlobalID:0x00007f48511dc860 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/4>>
+[ActiveJob] ↳ app/controllers/posts_controller.rb:22:in `create'
+Redirected to http://127.0.0.1:3000/posts/2
+Completed 302 Found in 51ms (ActiveRecord: 3.2ms (6 queries, 0 cached) | GC: 0.7ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757] Performing ActiveStorage::AnalyzeJob (Job ID: d3543593-3449-448a-8345-dadd367c0757) from Async(default) enqueued at 2024-11-20T01:49:20.742348479Z with arguments: #<GlobalID:0x00007f48511b0c60 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/4>>
+Started GET "/posts/2" for 127.0.0.1 at 2024-11-19 19:49:20 -0600
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757] [36m  Disk Storage (0.7ms) [0m[34mDownloaded file from key: mgtvwamxb0qreay503gxm3njldh6[0m
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  Rendered posts/show.html.erb within layouts/application (Duration: 6.0ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | GC: 0.6ms)
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mActiveStorage::Blob Update (11.3ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":202,\"height\":148,\"analyzed\":true}"], ["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mPost Update (0.1ms)[0m  [1m[33mUPDATE "posts" SET "updated_at" = ? WHERE "posts"."id" = ?[0m  [["updated_at", "2024-11-20 01:49:20.849405"], ["id", 2]]
+Completed 200 OK in 21ms (Views: 12.1ms | ActiveRecord: 0.5ms (4 queries, 0 cached) | GC: 0.9ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [d3543593-3449-448a-8345-dadd367c0757] Performed ActiveStorage::AnalyzeJob (Job ID: d3543593-3449-448a-8345-dadd367c0757) from Async(default) in 125.56ms
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzMwMCwzMDBdfSwicHVyIjoidmFyaWF0aW9uIn19--3f102d69aa3bad59e3a761e1f15008f6fe78ce9c/carro.png" for 127.0.0.1 at 2024-11-19 19:49:20 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53", "variation_key"=>"[FILTERED]", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 4], ["variation_digest", "pkPfIsoBPuv58vltqqvChmQguaY="], ["LIMIT", 1]]
+[36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: mgtvwamxb0qreay503gxm3njldh6[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveStorage::VariantRecord Create (2.4ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 4], ["variation_digest", "pkPfIsoBPuv58vltqqvChmQguaY="]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "3yxf84jhvxihoztyvguiy7ydjq0i"], ["filename", "carro.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 14214], ["checksum", "TXUpdubUUHpgzB6ow19NDA=="], ["created_at", "2024-11-20 01:49:21.083943"]]
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 3], ["blob_id", 5], ["created_at", "2024-11-20 01:49:21.086228"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+[36m  Disk Storage (0.6ms) [0m[32mUploaded file to key: 3yxf84jhvxihoztyvguiy7ydjq0i (checksum: TXUpdubUUHpgzB6ow19NDA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 3b81863f-3cb3-4ba6-a26b-2df8dc65a074) to Async(default) with arguments: #<GlobalID:0x00007f4850b1f1d0 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/5>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074] Performing ActiveStorage::AnalyzeJob (Job ID: 3b81863f-3cb3-4ba6-a26b-2df8dc65a074) from Async(default) enqueued at 2024-11-20T01:49:21.091930138Z with arguments: #<GlobalID:0x00007f4850b412f8 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/5>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074] [36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: 3yxf84jhvxihoztyvguiy7ydjq0i[0m
+[36m  Disk Storage (0.5ms) [0m[34mGenerated URL for file at key: 3yxf84jhvxihoztyvguiy7ydjq0i (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzeXhmODRqaHZ4aWhvenR5dmd1aXk3eWRqcTBpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MjEuMTI2WiIsInB1ciI6ImJsb2Jfa2V5In19--7f1473a645bace5b52d36a3676b07628521d8189/carro.jpg)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzeXhmODRqaHZ4aWhvenR5dmd1aXk3eWRqcTBpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MjEuMTI2WiIsInB1ciI6ImJsb2Jfa2V5In19--7f1473a645bace5b52d36a3676b07628521d8189/carro.jpg
+Completed 302 Found in 156ms (ActiveRecord: 3.7ms (7 queries, 0 cached) | GC: 8.8ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mActiveStorage::Blob Update (10.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":300,\"height\":300,\"analyzed\":true}"], ["id", 5]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 5]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 3]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzeXhmODRqaHZ4aWhvenR5dmd1aXk3eWRqcTBpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MjEuMTI2WiIsInB1ciI6ImJsb2Jfa2V5In19--7f1473a645bace5b52d36a3676b07628521d8189/carro.jpg" for 127.0.0.1 at 2024-11-19 19:49:21 -0600
+[ActiveJob] [ActiveStorage::AnalyzeJob] [3b81863f-3cb3-4ba6-a26b-2df8dc65a074] Performed ActiveStorage::AnalyzeJob (Job ID: 3b81863f-3cb3-4ba6-a26b-2df8dc65a074) from Async(default) in 108.3ms
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2024-11-19 19:49:28 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 13ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:49:28 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:49:28 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 22.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:49:32 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 256ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:49:32 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 8.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.7ms | GC: 0.0ms)
+Completed 200 OK in 25ms (Views: 21.8ms | ActiveRecord: 0.6ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzQwMCw0MDBdfSwicHVyIjoidmFyaWF0aW9uIn19--436cea16c55c86b5b737ff21ca87c87ad0143052/carro.png" for 127.0.0.1 at 2024-11-19 19:49:32 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53", "variation_key"=>"[FILTERED]", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 4], ["variation_digest", "ku0PabRttFoyg1lxkOD6CdmOCUE="], ["LIMIT", 1]]
+[36m  Disk Storage (0.1ms) [0m[34mDownloaded file from key: mgtvwamxb0qreay503gxm3njldh6[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveStorage::VariantRecord Create (7.6ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 4], ["variation_digest", "ku0PabRttFoyg1lxkOD6CdmOCUE="]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "wnafj4z4xb2ejlgbphu4lzmcmi91"], ["filename", "carro.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 19898], ["checksum", "2/8+t81KBdC8kfiWGLqJbA=="], ["created_at", "2024-11-20 01:49:32.747161"]]
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 4], ["blob_id", 6], ["created_at", "2024-11-20 01:49:32.757682"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+[36m  Disk Storage (1.1ms) [0m[32mUploaded file to key: wnafj4z4xb2ejlgbphu4lzmcmi91 (checksum: 2/8+t81KBdC8kfiWGLqJbA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: f531224e-86e4-4e6b-8fbd-05a973e05d14) to Async(default) with arguments: #<GlobalID:0x00007f4850b221f0 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/6>>
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: wnafj4z4xb2ejlgbphu4lzmcmi91 (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg
+Completed 302 Found in 197ms (ActiveRecord: 9.0ms (7 queries, 0 cached) | GC: 10.8ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:49:32 -0600
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14] Performing ActiveStorage::AnalyzeJob (Job ID: f531224e-86e4-4e6b-8fbd-05a973e05d14) from Async(default) enqueued at 2024-11-20T01:49:32.771849153Z with arguments: #<GlobalID:0x00007f4850b53200 @uri=#<URI::GID gid://instagram/ActiveStorage::Blob/6>>
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14] [36m  Disk Storage (1.0ms) [0m[34mDownloaded file from key: wnafj4z4xb2ejlgbphu4lzmcmi91[0m
+Completed 200 OK in 34ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mActiveStorage::Blob Update (1.8ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":400,\"height\":400,\"analyzed\":true}"], ["id", 6]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 6]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14]   [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [f531224e-86e4-4e6b-8fbd-05a973e05d14] Performed ActiveStorage::AnalyzeJob (Job ID: f531224e-86e4-4e6b-8fbd-05a973e05d14) from Async(default) in 130.88ms
+Started GET "/posts/2" for 127.0.0.1 at 2024-11-19 19:49:43 -0600
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  Rendered posts/show.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | GC: 0.0ms)
+Completed 200 OK in 26ms (Views: 21.8ms | ActiveRecord: 0.5ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzeXhmODRqaHZ4aWhvenR5dmd1aXk3eWRqcTBpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MjEuMTI2WiIsInB1ciI6ImJsb2Jfa2V5In19--7f1473a645bace5b52d36a3676b07628521d8189/carro.jpg" for 127.0.0.1 at 2024-11-19 19:49:43 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/2/edit" for 127.0.0.1 at 2024-11-19 19:49:47 -0600
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67:in `authorize_user!'
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:37:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/edit.html.erb:7
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/edit.html.erb:9
+  Rendered posts/edit.html.erb within layouts/application (Duration: 3.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 8.1ms | ActiveRecord: 0.4ms (6 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53/carro.png" for 127.0.0.1 at 2024-11-19 19:49:47 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[36m  Disk Storage (0.5ms) [0m[34mGenerated URL for file at key: mgtvwamxb0qreay503gxm3njldh6 (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtZ3R2d2FteGIwcXJlYXk1MDNneG0zbmpsZGg2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6NDcuNDUzWiIsInB1ciI6ImJsb2Jfa2V5In19--8a078a60e2a310bd1c1d2fd030ff761f1a2d6928/carro.png)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtZ3R2d2FteGIwcXJlYXk1MDNneG0zbmpsZGg2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6NDcuNDUzWiIsInB1ciI6ImJsb2Jfa2V5In19--8a078a60e2a310bd1c1d2fd030ff761f1a2d6928/carro.png
+Completed 302 Found in 9ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtZ3R2d2FteGIwcXJlYXk1MDNneG0zbmpsZGg2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8ucG5nXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8ucG5nIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6NDcuNDUzWiIsInB1ciI6ImJsb2Jfa2V5In19--8a078a60e2a310bd1c1d2fd030ff761f1a2d6928/carro.png" for 127.0.0.1 at 2024-11-19 19:49:47 -0600
+Processing by ActiveStorage::DiskController#show as PNG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/posts/2" for 127.0.0.1 at 2024-11-19 19:50:07 -0600
+Processing by PostsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"description"=>"El carro del futuro para Nicaragua"}, "commit"=>"Update Post", "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:42:in `update'
+  [1m[36mActiveStorage::Attachment Load (2.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:42:in `update'
+  [1m[36mPost Update (0.1ms)[0m  [1m[33mUPDATE "posts" SET "description" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["description", "El carro del futuro para Nicaragua"], ["updated_at", "2024-11-20 01:50:07.771336"], ["id", 2]]
+  ↳ app/controllers/posts_controller.rb:42:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:42:in `update'
+Redirected to http://127.0.0.1:3000/posts/2
+Completed 302 Found in 15ms (ActiveRecord: 2.7ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/2" for 127.0.0.1 at 2024-11-19 19:50:07 -0600
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:63:in `set_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/show.html.erb:2
+  Rendered posts/show.html.erb within layouts/application (Duration: 3.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | GC: 0.0ms)
+Completed 200 OK in 18ms (Views: 15.1ms | ActiveRecord: 0.2ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzeXhmODRqaHZ4aWhvenR5dmd1aXk3eWRqcTBpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MjEuMTI2WiIsInB1ciI6ImJsb2Jfa2V5In19--7f1473a645bace5b52d36a3676b07628521d8189/carro.jpg" for 127.0.0.1 at 2024-11-19 19:50:07 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:50:12 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 7.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 17.2ms | ActiveRecord: 0.4ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:50:12 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:51:29 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 10.6ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 453.7ms | GC: 3.8ms)
+Completed 200 OK in 459ms (Views: 453.9ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 3.8ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:51:29 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/coupons/" for 127.0.0.1 at 2024-11-19 19:52:10 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/coupons"):
+  
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:52:14 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 7.7ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 447.7ms | GC: 3.2ms)
+Completed 200 OK in 451ms (Views: 447.9ms | ActiveRecord: 0.4ms (5 queries, 0 cached) | GC: 3.2ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:52:15 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:52:40 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (1.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 11.5ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 395.7ms | GC: 4.8ms)
+Completed 200 OK in 410ms (Views: 394.9ms | ActiveRecord: 1.8ms (5 queries, 0 cached) | GC: 9.5ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzQwMCw0MDBdfSwicHVyIjoidmFyaWF0aW9uIn19--436cea16c55c86b5b737ff21ca87c87ad0143052/carro.png" for 127.0.0.1 at 2024-11-19 19:52:41 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6NCwicHVyIjoiYmxvYl9pZCJ9fQ==--e7bdf321f482deebc2438aac97ddd0a5952bab53", "variation_key"=>"[FILTERED]", "filename"=>"carro"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (3.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 4], ["variation_digest", "ku0PabRttFoyg1lxkOD6CdmOCUE="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: wnafj4z4xb2ejlgbphu4lzmcmi91 (http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTc6NDEuMTgxWiIsInB1ciI6ImJsb2Jfa2V5In19--407127c4967f6dd95b0eb1d7f2fb8e9ac021593e/carro.jpg)[0m
+Redirected to http://127.0.0.1:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTc6NDEuMTgxWiIsInB1ciI6ImJsb2Jfa2V5In19--407127c4967f6dd95b0eb1d7f2fb8e9ac021593e/carro.jpg
+Completed 302 Found in 36ms (ActiveRecord: 3.3ms (4 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:52:41 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:52:50 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 16.2ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 54.1ms | GC: 1.0ms)
+Completed 200 OK in 59ms (Views: 54.3ms | ActiveRecord: 0.4ms (5 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:52:50 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 304 Not Modified in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:52:55 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:2
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:5
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:14
+  Rendered posts/index.html.erb within layouts/application (Duration: 46.1ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 55.1ms | GC: 1.0ms)
+Completed 200 OK in 59ms (Views: 55.0ms | ActiveRecord: 0.6ms (5 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3bmFmajR6NHhiMmVqbGdicGh1NGx6bWNtaTkxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiY2Fycm8uanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnY2Fycm8uanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMTEtMjBUMDE6NTQ6MzIuNzg4WiIsInB1ciI6ImJsb2Jfa2V5In19--593485346609103af0c3d7f6e92c9648434bdfd5/carro.jpg" for 127.0.0.1 at 2024-11-19 19:52:55 -0600
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"carro"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2024-11-19 19:52:55 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2024-11-19 19:52:58 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 4ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:52:58 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:52:58 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 9.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.0ms | GC: 0.6ms)
+Completed 200 OK in 28ms (Views: 22.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2024-11-19 19:53:01 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_error_messages.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/registrations/new.html.erb within layouts/application (Duration: 4.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | GC: 1.2ms)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 4.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-19 19:53:13 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2024-11-19 19:53:13 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 0.4ms | GC: 0.2ms)
+  Rendered /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/devise-4.9.4/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 7.4ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.4ms | GC: 0.7ms)
+Completed 200 OK in 16ms (Views: 14.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
+
+
